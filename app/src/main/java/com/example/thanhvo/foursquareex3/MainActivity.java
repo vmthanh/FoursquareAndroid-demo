@@ -12,10 +12,11 @@ import android.support.v7.widget.Toolbar;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements FragmentMap.OnFragmentInteractionListenre{
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    private  ViewPagerAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter= new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new FragmentMap(), "Map");
         adapter.addFragment(new FragmentList(), "List");
 
@@ -68,5 +69,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
+    @Override
+    public void onFragmentInteraction(ArrayList<FoursquareVenue> venueList) {
+        FragmentList fragmentList = (FragmentList)adapter.getItem(1);
+        fragmentList.updateList(venueList);
+    }
 }

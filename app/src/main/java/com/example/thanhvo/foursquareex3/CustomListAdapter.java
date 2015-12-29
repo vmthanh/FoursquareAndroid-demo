@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+
 /**
  * Created by ThanhVo on 12/28/2015.
  */
@@ -31,6 +33,26 @@ public class CustomListAdapter extends RecyclerView.Adapter<CustomListAdapter.Vi
         this.itemaddress = itemaddress;
         this.itemcategories = itemcategories;
         this.itemdistance = itemdistance;
+    }
+    public CustomListAdapter(Context context,ArrayList<FoursquareVenue>venueList)
+    {
+        ArrayList<String> temmpname =new ArrayList<String>();
+        ArrayList<String> tempaddress =new ArrayList<String>();
+        ArrayList<String> tempcategories=new ArrayList<String>();
+        ArrayList<String> tempdistance =new ArrayList<String>();
+        for(int i=0; i<venueList.size();++i)
+        {
+            FoursquareVenue venue = venueList.get(i);
+            temmpname.add(venue.getName());
+            tempaddress.add(venue.getCrossStreet());
+            tempcategories.add(venue.getCategory());
+            tempdistance.add(venue.getDistance());
+
+        }
+        this.itemname = (String[])temmpname.toArray();
+        this.itemaddress = (String[])tempaddress.toArray();
+        this.itemcategories = (String[])tempcategories.toArray();
+        this.itemdistance = (String[])tempdistance.toArray();
     }
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private LinearLayout mainholder;
@@ -71,7 +93,6 @@ public class CustomListAdapter extends RecyclerView.Adapter<CustomListAdapter.Vi
             return this.itemname.length;
         }
 
-
     }
 
     @Override
@@ -83,8 +104,8 @@ public class CustomListAdapter extends RecyclerView.Adapter<CustomListAdapter.Vi
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.venue_name.setText(this.itemname[position]);
-        holder.venue_crossstreet.setText(this.itemaddress[position]);
-        holder.venue_category.setText(this.itemcategories[position]);
-        holder.venue_distance.setText(this.itemdistance[position]);
+        holder.venue_crossstreet.setText("Address: " + this.itemaddress[position]);
+        holder.venue_category.setText("Category: "+ this.itemcategories[position]);
+        holder.venue_distance.setText("Distance: "+ this.itemdistance[position] + " meters");
     }
 }

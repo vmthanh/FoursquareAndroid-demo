@@ -2,15 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.thanhvo.foursquareex3.FragmentList">
-    <!--<ListView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:id="@+id/list">
+    tools:context="com.example.thanhvo.foursquareex3.FragmentList"
+    >
 
-    </ListView>-->
     <android.support.v7.widget.RecyclerView
         android:id="@+id/list"
         android:scrollbars="vertical"
